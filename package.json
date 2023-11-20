@@ -1,0 +1,21 @@
+{
+  "name": "network-vis-plugin",
+  "version": "0.14.0",
+  "description": "Network plugin for visualizing networks",
+  "authors": [
+    "David Moreno Lumbreras <dmorenolumb@gmail.com>",
+    "Eva Millán <evamillan@bitergia.com>"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "randomcolor": "0.5.3",
+    "vis-data": "^6.5.1",
+    "vis-network": "^7.4.0",
+    "vis-util": "^1.1.8"
+  },
+  "scripts": {
+    "build": "yarn plugin-helpers build",
+    "plugin-helpers": "node ../../scripts/plugin_helpers",
+    "osd": "node ../../scripts/osd"
+  }
+}

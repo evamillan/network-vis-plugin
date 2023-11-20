@@ -1,0 +1,18 @@
+{
+  "id": "networkVisPlugin",
+  "version": "0.14.0",
+  "opensearchDashboardsVersion": "2.11.0",
+  "server": false,
+  "ui": true,
+  "requiredPlugins": [
+    "visualizations",
+    "data",
+    "inspector",
+    "opensearchDashboardsReact",
+    "opensearchDashboardsUtils",
+    "visDefaultEditor",
+    "share",
+    "charts"
+  ],
+  "optionalPlugins": []
+}
