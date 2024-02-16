@@ -76,6 +76,8 @@ export function getNetworkVisTypeDefinition() {
         springConstant: 0.001,
         gravitationalConstant: -35000,
         labelColor: '#000000',
+        firstNodeFontSize: 18,
+        secondNodeFontSize: 18,
       },
     },
     editorConfig: {

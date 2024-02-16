@@ -257,6 +257,7 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
             value: value,
             font: {
               color: visParams.labelColor,
+              size: visParams.firstNodeFontSize,
             },
           };
   
@@ -328,6 +329,7 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
                   color: visParams.secondNodeColor,
                   font: {
                     color: visParams.labelColor,
+                    size: visParams.secondNodeFontSize,
                   },
                   shape: visParams.shapeSecondNode,
                 };
@@ -480,6 +482,7 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
             value: value,
             font: {
               color: visParams.labelColor,
+              size: visParams.firstNodeFontSize
             },
           };
   
