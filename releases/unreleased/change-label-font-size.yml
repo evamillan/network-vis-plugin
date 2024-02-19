@@ -1,0 +1,9 @@
+---
+title: Change label font size
+category: added
+author: Eva Millán <evamillan@bitergia.com>
+issue: null
+notes: >
+  The font size for each type of node can
+  be configured on the "size" section of
+  the "options" tab.

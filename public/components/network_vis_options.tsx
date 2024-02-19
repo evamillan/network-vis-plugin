@@ -52,6 +52,8 @@ export interface NetworkVisParams {
   nodePhysics: boolean;
   firstNodeColor: string;
   secondNodeColor: string;
+  firstNodeFontSize: number;
+  secondNodeFontSize: number;
   shapeFirstNode: string;
   shapeSecondNode: string;
   displayArrow: boolean;
@@ -288,6 +290,30 @@ function NetworkOptions({
           }
           value={stateParams.minEdgeSize}
           paramName="minEdgeSize"
+          setValue={setValue}
+        />
+
+        <NumberInputOption
+          label={
+            <FormattedMessage
+              id="visTypeTable.params.firstNodeFontSize"
+              defaultMessage="First node font size"
+            />
+          }
+          value={stateParams.firstNodeFontSize}
+          paramName="firstNodeFontSize"
+          setValue={setValue}
+        />
+
+        <NumberInputOption
+          label={
+            <FormattedMessage
+              id="visTypeTable.params.secondNodeFontSize"
+              defaultMessage="Second node font size"
+            />
+          }
+          value={stateParams.secondNodeFontSize}
+          paramName="secondNodeFontSize"
           setValue={setValue}
         />
         
