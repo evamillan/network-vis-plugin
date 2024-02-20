@@ -1,5 +1,14 @@
 # Releases
 
+## network-vis-plugin 0.17.0 - (2024-02-20)
+
+**New features:**
+
+ * Change label font size\
+   The font size for each type of node can be configured on the "size"
+   section of the "options" tab.
+
+
   ## network-vis-plugin 0.16.2 - (2024-02-08)
   
   * No changes on this component. The version is bumped to align it
