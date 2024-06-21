@@ -1,5 +1,14 @@
 # Releases
 
+## network-vis-plugin 0.20.1 - (2024-06-21)
+
+**Bug fixes:**
+
+ * Fix issues with legend cache\
+   The legend for color nodes sometimes displayed cached values from
+   previous versions of the visualization.
+
+
   ## network-vis-plugin 0.20.0 - (2024-05-09)
   
   * No changes on this component. The version is bumped to align it
