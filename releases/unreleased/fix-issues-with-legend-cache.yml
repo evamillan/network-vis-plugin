@@ -1,0 +1,8 @@
+---
+title: Fix issues with legend cache
+category: fixed
+author: Eva Millán <evamillan@bitergia.com>
+issue: null
+notes: >
+  The legend for color nodes sometimes displayed cached
+  values from previous versions of the visualization.

@@ -37,9 +37,14 @@ import { Legend } from './network_vis_legend';
 export const NetworkVis = ({ vis, visData, visParams}) => {
   const { toasts } = getNotifications();
   const container = useRef<HTMLDivElement>(null);
-  const [colorDicc, setColorDicc] = useState(vis.uiState.get('vis.colors', {}));
-  const defaultPalette = euiPaletteColorBlind({rotations: 2});
-  const usedColors: String[] = [];
+  const customColors = vis.uiState.get('vis.colors', {})
+  const [colorDicc, setColorDicc] = useState(customColors);
+  const defaultPalette = euiPaletteColorBlind({
+    rotations: 3,
+    direction: 'both',
+    order: 'middle-out'
+  });
+  const legend = new Map<string, string>();
   const buckets = visData.rows;
   const options = {
     physics: {
@@ -105,10 +110,6 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
     container.current &&
     new Network(container.current, { nodes, edges }, options);
   }, [container, nodes, edges])
-
-  useEffect(() => {
-    vis.uiState.set('vis.colors', colorDicc);
-  }, [colorDicc])
 
   function getTooltipTitle(termName, termValue, sizeTerm = null, sizeValue = null) {
     let tooltipTitle = termName + ': ' + termValue;
@@ -225,19 +226,17 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
             if (colorDicc[bucket[colorBucketId]]) {
               dataParsed[i].nodeColorKey = bucket[colorBucketId];
               dataParsed[i].nodeColorValue = colorDicc[bucket[colorBucketId]];
-              usedColors.push(colorDicc[bucket[colorBucketId]]);
             } else {
               const confirmColor =
                 defaultPalette.find(
                   (color) =>
-                    Object.values(colorDicc).indexOf(color) === -1 &&
-                    usedColors.indexOf(color) === -1
+                    Object.values(colorDicc).indexOf(color) === -1
                 ) || randomColor();
-              colorDicc[bucket[colorBucketId]] = confirmColor;
+              setColorDicc({...colorDicc, [bucket[colorBucketId]]: confirmColor})
               dataParsed[i].nodeColorKey = bucket[colorBucketId];
               dataParsed[i].nodeColorValue = colorDicc[bucket[colorBucketId]];
-              usedColors.push(confirmColor);
             }
+            legend.set(bucket[colorBucketId], colorDicc[bucket[colorBucketId]])
           }
   
           let colorNodeFinal = visParams.firstNodeColor;
@@ -444,19 +443,15 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
             if (colorDicc[bucket[colorBucketId]]) {
               dataParsed[i].nodeColorKey = bucket[colorBucketId];
               dataParsed[i].nodeColorValue = colorDicc[bucket[colorBucketId]];
-              usedColors.push(colorDicc[bucket[colorBucketId]]);
             } else {
               const confirmColor =
-                defaultPalette.find(
-                  (color) =>
-                    Object.values(colorDicc).indexOf(color) === -1 &&
-                    usedColors.indexOf(color) === -1
-                  ) || randomColor();
-              colorDicc[bucket[colorBucketId]] = confirmColor;
+                defaultPalette.find((color) => Object.values(colorDicc).indexOf(color) === -1 ) ||
+                randomColor();
+              setColorDicc({...colorDicc, [bucket[colorBucketId]]: confirmColor})
               dataParsed[i].nodeColorKey = bucket[colorBucketId];
               dataParsed[i].nodeColorValue = colorDicc[bucket[colorBucketId]];
-              usedColors.push(confirmColor);
             }
+            legend.set(bucket[colorBucketId], colorDicc[bucket[colorBucketId]])
           }
   
           const relation = {
@@ -617,9 +612,8 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
       <div ref={container} style={{ height: '100%', width: '100%' }} />
       {colorBucketId && visParams.showColorLegend ?
         <Legend
-          colorDicc={colorDicc}
+          items={legend}
           setColorDicc={setColorDicc}
-          usedColors={usedColors}
           uiState={vis.uiState}
         /> : null
       }

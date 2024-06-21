@@ -30,9 +30,9 @@
 import React from 'react';
 import { ouiPaletteColorBlind } from '@elastic/eui';
 
-export const Legend = ({colorDicc, setColorDicc, usedColors, uiState}) => {
-  const defaultPalette = ouiPaletteColorBlind({rotations: 2});
-  const saveColors = (event) => {
+export const Legend = ({items, setColorDicc, uiState}) => {
+  const defaultPalette = ouiPaletteColorBlind({rotations: 1});
+  const saveColors = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.persist()
     const copy = uiState.get('vis.colors', {});
     copy[event.target.id] = event.target.value;
@@ -40,25 +40,22 @@ export const Legend = ({colorDicc, setColorDicc, usedColors, uiState}) => {
     setColorDicc(copy);
   };
   const options = defaultPalette.map((color) => <option key={color}>{color}</option>)
-  const colorList = Object
-    .keys(colorDicc)
-    .filter(key => usedColors.find(color => color === colorDicc[key]));
-  const listItems = colorList.map(colorKey =>
-    <li key={colorKey} className='vis-network-legend-line'>
+  const listItems = [...items].map(item =>
+    <li key={item[0]} className='vis-network-legend-line'>
       <input
         type="color"
         list="color-datalist"
-        id={colorKey}
-        name={colorKey}
-        value={colorDicc[colorKey]}
+        id={item[0]}
+        name={item[0]}
+        value={item[1]}
         onChange={saveColors}
       />
-      <label htmlFor={colorKey}>
+      <label htmlFor={item[0]}>
         <div 
           className="vis-network-legend-color"
-          style={{backgroundColor: colorDicc[colorKey]}}
+          style={{backgroundColor: item[1]}}
         />
-        {colorKey}
+        {item[0]}
       </label>
       <datalist id="color-datalist">{options}</datalist>
     </li>
