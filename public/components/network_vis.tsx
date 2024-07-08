@@ -122,11 +122,11 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
   const getColumnIdByAggId = (aggId) => {
     return visData.columns?.find((col) => {
       return col.id.split('-')[2] === aggId;
-    }).id;
+    })?.id;
   };
 
   function getColumnNameFromColumnId(columnId) {
-    return visData.columns?.find(colObj => colObj.id === columnId).name;
+    return visData.columns?.find(colObj => colObj.id === columnId)?.name;
   }
 
   function getData() {
@@ -140,10 +140,10 @@ export const NetworkVis = ({ vis, visData, visParams}) => {
         // This might look confusing in a tooltip, so only the term name is used here
         if (firstFirstBucketId) {
           firstSecondBucketId = getColumnIdByAggId(agg.id);
-          secondaryNodeTermName = getColumnNameFromColumnId(firstSecondBucketId).split(':')[0];
+          secondaryNodeTermName = getColumnNameFromColumnId(firstSecondBucketId)?.split(':')[0];
         } else {
           firstFirstBucketId = getColumnIdByAggId(agg.id);
-          primaryNodeTermName = getColumnNameFromColumnId(firstFirstBucketId).split(':')[0];
+          primaryNodeTermName = getColumnNameFromColumnId(firstFirstBucketId)?.split(':')[0];
         }
       } else if (agg.schema === 'second') {
         secondBucketId = getColumnIdByAggId(agg.id);
