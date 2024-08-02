@@ -1,8 +1,0 @@
----
-title: Fix error when a bucket is disabled
-category: fixed
-author: Eva Millán <evamillan@bitergia.com>
-issue: 6
-notes: >
-  The visualization no longer fails to load when a bucket
-  is disabled.
